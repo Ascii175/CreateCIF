@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.0.2 (Python 3.11.2 on win32)" generated="20230811 14:54:06.019" rpa="true" schemaversion="3">
+<suite id="s1" name="CreateCIFv0 2" source="C:\Users\Earth\CreateCIF\CreateCIFv0_2.robot">
+<test id="s1-t1" name="open mobius" line="27">
+<kw name="Open Chrome Browser">
+<arg>${url5}</arg>
+<doc>Open Chrome Browser and go to page.</doc>
+<kw name="Evaluate" library="BuiltIn">
+<var>${system}</var>
+<arg>platform.system()</arg>
+<arg>platform</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230811 14:54:06.396" level="INFO">${system} = Windows</msg>
+<status status="PASS" starttime="20230811 14:54:06.388" endtime="20230811 14:54:06.396"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${chrome_options}</var>
+<arg>sys.modules['selenium.webdriver'].ChromeOptions()</arg>
+<arg>sys</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20230811 14:54:06.396" level="INFO">${chrome_options} = &lt;selenium.webdriver.chrome.options.Options object at 0x000001AB730DE690&gt;</msg>
+<status status="PASS" starttime="20230811 14:54:06.396" endtime="20230811 14:54:06.396"/>
+</kw>
+<kw name="Call Method" library="BuiltIn">
+<arg>${chrome_options}</arg>
+<arg>add_experimental_option</arg>
+<arg>useAutomationExtension</arg>
+<arg>${False}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" starttime="20230811 14:54:06.397" endtime="20230811 14:54:06.397"/>
+</kw>
+<kw name="Call Method" library="BuiltIn">
+<arg>${chrome_options}</arg>
+<arg>add_argument</arg>
+<arg>test-type</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" starttime="20230811 14:54:06.397" endtime="20230811 14:54:06.397"/>
+</kw>
+<kw name="Call Method" library="BuiltIn">
+<arg>${chrome_options}</arg>
+<arg>add_argument</arg>
+<arg>ignore-certificate-errors</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" starttime="20230811 14:54:06.397" endtime="20230811 14:54:06.397"/>
+</kw>
+<kw name="Call Method" library="BuiltIn">
+<arg>${chrome_options}</arg>
+<arg>add_argument</arg>
+<arg>--disable-gpu</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" starttime="20230811 14:54:06.397" endtime="20230811 14:54:06.397"/>
+</kw>
+<kw name="Call Method" library="BuiltIn">
+<arg>${chrome_options}</arg>
+<arg>add_argument</arg>
+<arg>--no-sandbox</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" starttime="20230811 14:54:06.397" endtime="20230811 14:54:06.397"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${prefs}</var>
+<arg>download.prompt_for_download=${true}</arg>
+<arg>safebrowsing.enabled=${false}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230811 14:54:06.398" level="INFO">${prefs} = {'download.prompt_for_download': True, 'safebrowsing.enabled': False}</msg>
+<status status="PASS" starttime="20230811 14:54:06.397" endtime="20230811 14:54:06.398"/>
+</kw>
+<kw name="Call Method" library="BuiltIn">
+<arg>${chrome_options}</arg>
+<arg>add_experimental_option</arg>
+<arg>prefs</arg>
+<arg>${prefs}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" starttime="20230811 14:54:06.398" endtime="20230811 14:54:06.398"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${system}'=='Linux'</arg>
+<arg>Run Keywords</arg>
+<arg>Call Method</arg>
+<arg>${chrome_options}</arg>
+<arg>add_argument</arg>
+<arg>test-type</arg>
+<arg>AND</arg>
+<arg>Call Method</arg>
+<arg>${chrome_options}</arg>
+<arg>add_argument</arg>
+<arg>ignore-certificate-errors</arg>
+<arg>AND</arg>
+<arg>Call Method</arg>
+<arg>${chrome_options}</arg>
+<arg>add_argument</arg>
+<arg>--disable-extensions</arg>
+<arg>AND</arg>
+<arg>Call Method</arg>
+<arg>${chrome_options}</arg>
+<arg>add_argument</arg>
+<arg>--headless</arg>
+<arg>AND</arg>
+<arg>Call Method</arg>
+<arg>${chrome_options}</arg>
+<arg>add_argument</arg>
+<arg>--disable-gpu</arg>
+<arg>AND</arg>
+<arg>Call Method</arg>
+<arg>${chrome_options}</arg>
+<arg>add_argument</arg>
+<arg>--no-sandbox</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20230811 14:54:06.398" endtime="20230811 14:54:06.398"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${driver_path}</var>
+<arg>'${system}'=='Linux'</arg>
+<arg>Set Variable</arg>
+<arg>${CHROME_DRIVER_PATH_LINUX}</arg>
+<arg>ELSE IF</arg>
+<arg>'${system}'=='Windows'</arg>
+<arg>Set Variable</arg>
+<arg>${CHROME_DRIVER_PATH_WINS}</arg>
+<arg>ELSE IF</arg>
+<arg>'${system}'=='Darwin'</arg>
+<arg>Set Variable</arg>
+<arg>${CHROME_DRIVER_PATH_MAC}</arg>
+<arg>ELSE</arg>
+<arg>fail</arg>
+<arg>Not support system : ${system}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Set Variable" library="BuiltIn">
+<arg>${CHROME_DRIVER_PATH_WINS}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" starttime="20230811 14:54:06.398" endtime="20230811 14:54:06.398"/>
+</kw>
+<msg timestamp="20230811 14:54:06.398" level="INFO">${driver_path} = C:\Users\Earth\CreateCIF\resources\drivers\win32\chromedriver.exe</msg>
+<status status="PASS" starttime="20230811 14:54:06.398" endtime="20230811 14:54:06.398"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${kwargs}</var>
+<arg>executable_path=${driver_path}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230811 14:54:06.398" level="INFO">${kwargs} = {'executable_path': 'C:\\Users\\Earth\\CreateCIF\\resources\\drivers\\win32\\chromedriver.exe'}</msg>
+<status status="PASS" starttime="20230811 14:54:06.398" endtime="20230811 14:54:06.398"/>
+</kw>
+<kw name="Create Webdriver" library="Selenium2Library">
+<arg>Chrome</arg>
+<arg>chrome_options=${chrome_options}</arg>
+<arg>kwargs=${kwargs}</arg>
+<doc>Creates an instance of Selenium WebDriver.</doc>
+<msg timestamp="20230811 14:54:06.399" level="INFO">Creating an instance of the Chrome WebDriver.</msg>
+<status status="PASS" starttime="20230811 14:54:06.399" endtime="20230811 14:54:07.518"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${system}'=='Windows'</arg>
+<arg>Maximize Browser Window</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Maximize Browser Window" library="Selenium2Library">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20230811 14:54:07.518" endtime="20230811 14:54:07.636"/>
+</kw>
+<status status="PASS" starttime="20230811 14:54:07.518" endtime="20230811 14:54:07.636"/>
+</kw>
+<kw name="Set Selenium Speed" library="Selenium2Library">
+<arg>0.2 seconds</arg>
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<status status="PASS" starttime="20230811 14:54:07.637" endtime="20230811 14:54:07.637"/>
+</kw>
+<kw name="Go To" library="Selenium2Library">
+<arg>${url}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<msg timestamp="20230811 14:54:07.637" level="INFO">Opening url 'https://cdx-sit-pci-kong-clb.dev.depthcon1.com/mobius'</msg>
+<status status="PASS" starttime="20230811 14:54:07.637" endtime="20230811 14:54:10.802"/>
+</kw>
+<status status="PASS" starttime="20230811 14:54:06.388" endtime="20230811 14:54:10.802"/>
+</kw>
+<kw name="Maximize Browser Window" library="Selenium2Library">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20230811 14:54:10.802" endtime="20230811 14:54:11.004"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="Selenium2Library">
+<arg>xpath://input[@id='submitButton']</arg>
+<arg>60</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20230811 14:54:11.004" endtime="20230811 14:54:11.445"/>
+</kw>
+<kw name="Click Button" library="Selenium2Library">
+<arg>id=submitButton</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20230811 14:54:11.445" level="INFO">Clicking button 'id=submitButton'.</msg>
+<status status="PASS" starttime="20230811 14:54:11.445" endtime="20230811 14:54:12.505"/>
+</kw>
+<status status="PASS" starttime="20230811 14:54:06.387" endtime="20230811 14:54:12.505"/>
+</test>
+<test id="s1-t2" name="Login" line="32">
+<kw name="Input Text" library="Selenium2Library">
+<arg>name=userID</arg>
+<arg>99361CIM02</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230811 14:54:12.506" level="INFO">Typing text '99361CIM02' into text field 'name=userID'.</msg>
+<status status="PASS" starttime="20230811 14:54:12.506" endtime="20230811 14:54:13.152"/>
+</kw>
+<kw name="Click Button" library="Selenium2Library">
+<arg>id=submitBtn</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20230811 14:54:13.152" level="INFO">Clicking button 'id=submitBtn'.</msg>
+<status status="PASS" starttime="20230811 14:54:13.152" endtime="20230811 14:54:14.668"/>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<arg>name=opensesame</arg>
+<arg>mobius</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230811 14:54:14.668" level="INFO">Typing text 'mobius' into text field 'name=opensesame'.</msg>
+<status status="PASS" starttime="20230811 14:54:14.668" endtime="20230811 14:54:15.305"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>1</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20230811 14:54:16.305" level="INFO">Slept 1 second</msg>
+<status status="PASS" starttime="20230811 14:54:15.305" endtime="20230811 14:54:16.305"/>
+</kw>
+<kw name="Click Button" library="Selenium2Library">
+<arg>id=submitBtn</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20230811 14:54:16.305" level="INFO">Clicking button 'id=submitBtn'.</msg>
+<status status="PASS" starttime="20230811 14:54:16.305" endtime="20230811 14:54:17.871"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>2</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20230811 14:54:19.871" level="INFO">Slept 2 seconds</msg>
+<status status="PASS" starttime="20230811 14:54:17.871" endtime="20230811 14:54:19.871"/>
+</kw>
+<kw name="Get Element Attribute" library="Selenium2Library">
+<var>${secpassList1}</var>
+<arg>xpath://input[@id='secpassList1']</arg>
+<arg>tabindex</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20230811 14:54:20.287" level="INFO">${secpassList1} = -1</msg>
+<status status="PASS" starttime="20230811 14:54:19.871" endtime="20230811 14:54:20.287"/>
+</kw>
+<kw name="Get Element Attribute" library="Selenium2Library">
+<var>${secpassList2}</var>
+<arg>xpath://input[@id='secpassList2']</arg>
+<arg>tabindex</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20230811 14:54:20.702" level="INFO">${secpassList2} = None</msg>
+<status status="PASS" starttime="20230811 14:54:20.287" endtime="20230811 14:54:20.702"/>
+</kw>
+<kw name="Get Element Attribute" library="Selenium2Library">
+<var>${secpassList3}</var>
+<arg>xpath://input[@id='secpassList3']</arg>
+<arg>tabindex</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20230811 14:54:21.113" level="INFO">${secpassList3} = None</msg>
+<status status="PASS" starttime="20230811 14:54:20.702" endtime="20230811 14:54:21.113"/>
+</kw>
+<kw name="Get Element Attribute" library="Selenium2Library">
+<var>${secpassList4}</var>
+<arg>xpath://input[@id='secpassList4']</arg>
+<arg>tabindex</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20230811 14:54:21.526" level="INFO">${secpassList4} = None</msg>
+<status status="PASS" starttime="20230811 14:54:21.113" endtime="20230811 14:54:21.526"/>
+</kw>
+<kw name="Get Element Attribute" library="Selenium2Library">
+<var>${secpassList5}</var>
+<arg>xpath://input[@id='secpassList5']</arg>
+<arg>tabindex</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20230811 14:54:21.937" level="INFO">${secpassList5} = None</msg>
+<status status="PASS" starttime="20230811 14:54:21.526" endtime="20230811 14:54:21.937"/>
+</kw>
+<kw name="Get Element Attribute" library="Selenium2Library">
+<var>${secpassList6}</var>
+<arg>xpath://input[@id='secpassList6']</arg>
+<arg>tabindex</arg>
+<doc>Returns the value of ``attribute`` from the element ``locator``.</doc>
+<msg timestamp="20230811 14:54:22.348" level="INFO">${secpassList6} = None</msg>
+<status status="PASS" starttime="20230811 14:54:21.937" endtime="20230811 14:54:22.348"/>
+</kw>
+<if>
+<branch type="IF" condition="${secpassList1} == None">
+<kw name="Input Text" library="Selenium2Library">
+<arg>id=secpassList1</arg>
+<arg>A</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20230811 14:54:22.348" endtime="20230811 14:54:22.348"/>
+</kw>
+<status status="NOT RUN" starttime="20230811 14:54:22.348" endtime="20230811 14:54:22.348"/>
+</branch>
+<status status="PASS" starttime="20230811 14:54:22.348" endtime="20230811 14:54:22.348"/>
+</if>
+<if>
+<branch type="IF" condition="${secpassList2} == None">
+<kw name="Input Text" library="Selenium2Library">
+<arg>id=secpassList2</arg>
+<arg>b</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230811 14:54:22.349" level="INFO">Typing text 'b' into text field 'id=secpassList2'.</msg>
+<status status="PASS" starttime="20230811 14:54:22.348" endtime="20230811 14:54:22.979"/>
+</kw>
+<status status="PASS" starttime="20230811 14:54:22.348" endtime="20230811 14:54:22.979"/>
+</branch>
+<status status="PASS" starttime="20230811 14:54:22.348" endtime="20230811 14:54:22.979"/>
+</if>
+<if>
+<branch type="IF" condition="${secpassList3} == None">
+<kw name="Input Text" library="Selenium2Library">
+<arg>id=secpassList3</arg>
+<arg>1</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230811 14:54:22.979" level="INFO">Typing text '1' into text field 'id=secpassList3'.</msg>
+<status status="PASS" starttime="20230811 14:54:22.979" endtime="20230811 14:54:23.611"/>
+</kw>
+<status status="PASS" starttime="20230811 14:54:22.979" endtime="20230811 14:54:23.611"/>
+</branch>
+<status status="PASS" starttime="20230811 14:54:22.979" endtime="20230811 14:54:23.611"/>
+</if>
+<if>
+<branch type="IF" condition="${secpassList4} == None">
+<kw name="Input Text" library="Selenium2Library">
+<arg>id=secpassList4</arg>
+<arg>1</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230811 14:54:23.611" level="INFO">Typing text '1' into text field 'id=secpassList4'.</msg>
+<status status="PASS" starttime="20230811 14:54:23.611" endtime="20230811 14:54:24.245"/>
+</kw>
+<status status="PASS" starttime="20230811 14:54:23.611" endtime="20230811 14:54:24.245"/>
+</branch>
+<status status="PASS" starttime="20230811 14:54:23.611" endtime="20230811 14:54:24.245"/>
+</if>
+<if>
+<branch type="IF" condition="${secpassList5} == None">
+<kw name="Input Text" library="Selenium2Library">
+<arg>id=secpassList5</arg>
+<arg>1</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230811 14:54:24.245" level="INFO">Typing text '1' into text field 'id=secpassList5'.</msg>
+<status status="PASS" starttime="20230811 14:54:24.245" endtime="20230811 14:54:24.879"/>
+</kw>
+<status status="PASS" starttime="20230811 14:54:24.245" endtime="20230811 14:54:24.879"/>
+</branch>
+<status status="PASS" starttime="20230811 14:54:24.245" endtime="20230811 14:54:24.879"/>
+</if>
+<if>
+<branch type="IF" condition="${secpassList6} == None">
+<kw name="Input Text" library="Selenium2Library">
+<arg>id=secpassList6</arg>
+<arg>1</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20230811 14:54:24.880" level="INFO">Typing text '1' into text field 'id=secpassList6'.</msg>
+<status status="PASS" starttime="20230811 14:54:24.879" endtime="20230811 14:54:25.514"/>
+</kw>
+<status status="PASS" starttime="20230811 14:54:24.879" endtime="20230811 14:54:25.514"/>
+</branch>
+<status status="PASS" starttime="20230811 14:54:24.879" endtime="20230811 14:54:25.514"/>
+</if>
+<kw name="Sleep" library="BuiltIn">
+<arg>0.5</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20230811 14:54:26.015" level="INFO">Slept 500 milliseconds</msg>
+<status status="PASS" starttime="20230811 14:54:25.514" endtime="20230811 14:54:26.015"/>
+</kw>
+<kw name="Click Button" library="Selenium2Library">
+<arg>id=authenticateBtn</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20230811 14:54:26.015" level="INFO">Clicking button 'id=authenticateBtn'.</msg>
+<status status="PASS" starttime="20230811 14:54:26.015" endtime="20230811 14:54:28.579"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="Selenium2Library">
+<arg>xpath://a[text()='Customer']</arg>
+<arg>60</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="FAIL" starttime="20230811 14:54:29.435" endtime="20230811 14:54:29.634"/>
+</kw>
+<status status="FAIL" starttime="20230811 14:54:12.505" endtime="20230811 14:54:29.635">Execution terminated by signal</status>
+</test>
+<test id="s1-t3" name="Click Customer" line="71">
+<tag>robot:exit</tag>
+<status status="FAIL" starttime="20230811 14:54:29.636" endtime="20230811 14:54:29.636">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-t4" name="Click Customer 360" line="74">
+<tag>robot:exit</tag>
+<status status="FAIL" starttime="20230811 14:54:29.639" endtime="20230811 14:54:29.640">Test execution stopped due to a fatal error.</status>
+</test>
+<test id="s1-t5" name="Calculate" line="82">
+<tag>robot:exit</tag>
+<status status="FAIL" starttime="20230811 14:54:29.640" endtime="20230811 14:54:29.641">Test execution stopped due to a fatal error.</status>
+</test>
+<status status="FAIL" starttime="20230811 14:54:06.020" endtime="20230811 14:54:29.641"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="4" skip="0">All Tasks</stat>
+</total>
+<tag>
+<stat pass="1" fail="1" skip="0" info="combined" combined="NOT robot:exit">NOT robot:exit</stat>
+</tag>
+<suite>
+<stat pass="1" fail="4" skip="0" id="s1" name="CreateCIFv0 2">CreateCIFv0 2</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
