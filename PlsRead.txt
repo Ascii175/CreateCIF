@@ -1,0 +1,4 @@
+pls install libs before using robot 
+how to install libs
+1. open cmd with this path
+2. pip install -r requirements.txt
